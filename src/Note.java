@@ -9,29 +9,28 @@ import java.util.List;
 public class Note implements Serializable{
     //Static Fields and Methods
     private static ArrayList<Note> notes = new ArrayList<>();
+    private static final String SAVELOCATION = "MyNotes.notes";
 
     public static boolean saveNotes(){
         try {
-            FileOutputStream fos = new FileOutputStream("t.tmp");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVELOCATION));
             oos.writeObject(notes);
             oos.close();
             return true;
         } catch (Exception e) {
-            System.err.println("Couldn't Save");
+            System.err.println("COULDNT SAVE NOTES TO FILE");
             return false;
         } 
     }
-
     public static boolean loadNotes(){
         try {
-             FileInputStream fis = new FileInputStream("t.tmp");
+             FileInputStream fis = new FileInputStream(SAVELOCATION);
             ObjectInputStream ois = new ObjectInputStream(fis);
             notes = (ArrayList<Note>) ois.readObject();
             ois.close();
             return true;
         } catch (Exception e) {
-            System.err.println("Couldnt Read");
+            System.err.println("COULDN'T READ NOTES FROM FILE");
             return false;
         }
     }
