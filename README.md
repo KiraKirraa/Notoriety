@@ -12,4 +12,5 @@ A caseboard-like note taking app
     - potentially treat everything as a note (e.g. a copy-pasted image is just a note with an image field and a title)
 - add a directory and note-searching
     - should notes be sorted by title rather than id??? how does item-note linking work???
+- custom look and feel (oh goodness this will suck)
 - add calendar system (MUCH LATER)
