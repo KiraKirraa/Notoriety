@@ -1,5 +1,4 @@
-import java.awt.Image;
-import java.io.*;
+import java.awt.BorderLayout;
 import javax.swing.*;
 
 class Main{
@@ -13,10 +12,14 @@ class Main{
         Note.printAll();
         Note.saveNotes();
 
+        Board.loadBoards();
+        Board.newBoard("Board1");
+        Board.getBoardById(0).addItem(1);
+        Board.newBoard("Board2");
+        Board.printAll();
+        Board.saveBoards();
 
         
-
-
         JFrame frame = new JFrame(APP_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -24,9 +27,24 @@ class Main{
         ImageIcon icon = new ImageIcon(ICON_PATH); // Replace with your image path
         frame.setIconImage(icon.getImage());
 
+        JDesktopPane desktopPane = new JDesktopPane();
+        frame.add(desktopPane, BorderLayout.CENTER);
+
         frame.setSize(1080, 720);
-        
+
+
+        JLabel welcomeLabel = new JLabel("Welcome to " + APP_NAME + "!");
+        welcomeLabel.setBounds(20, 20, 300, 30); // Set position and size
+        desktopPane.add(welcomeLabel);
+
+        for(int i = 0; i < 2; i++){
+            Item internalFrame = new Item(i);
+            desktopPane.add(internalFrame);
+            internalFrame.setVisible(true);
+        }
+
         frame.setVisible(true);
     }
+
     
 }
