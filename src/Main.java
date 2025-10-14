@@ -6,6 +6,16 @@ class Main{
     private static final String ICON_PATH = "./InvestigationBoard/assets/DetectiveIcon.png";
 
     public static void main(String[] args) {
+        UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();
+        for (UIManager.LookAndFeelInfo look : looks) {
+            System.out.println(look.getClassName());
+        }
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (Exception e) {
+            System.err.println("Couldn't set look and feel");
+        }
+
         Note.loadNotes();
         Note.newNote("Note1");
         Note.newNote("Note2");
@@ -19,7 +29,7 @@ class Main{
         Board.printAll();
         Board.saveBoards();
 
-        
+
         JFrame frame = new JFrame(APP_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
