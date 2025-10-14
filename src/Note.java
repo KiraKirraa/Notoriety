@@ -6,11 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+// Data for notes, items will reference notes by their id
 public class Note implements Serializable{
     //Static Fields and Methods
-    private static ArrayList<Note> notes = new ArrayList<>();
-    private static final String SAVELOCATION = "MyNotes.notes";
+    private static ArrayList<Note> notes = new ArrayList<>(); // All notes in the system
+    private static final String SAVELOCATION = "MyNotes.notes"; // Location to save notes to
 
+    // Save and Load notes from file
     public static boolean saveNotes(){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SAVELOCATION));
@@ -35,13 +37,14 @@ public class Note implements Serializable{
         }
     }
 
+    // Create a new note with the given title
     public static Note newNote(String title){
         Note n = new Note(title);
         notes.add(n);
         return n;
     }
 
-    //Print all note in order of creation
+    // Print all note in order of creation
     public static void printAll(){
         //Body
         for(int i = 0; i < notes.size(); i++){
@@ -49,6 +52,7 @@ public class Note implements Serializable{
         }
     }
 
+    // Get note by its id
     public static Note getNoteById(int id){
         //Break Conditions 
         if(id < 0){
@@ -62,18 +66,20 @@ public class Note implements Serializable{
         return notes.get(id);
     }
 
-    //Instance Fields
-    private int id;
-    private String title;
+    // Instance Fields
+    private int id; // Unique identifier for this note
+    private String title; // Title of the note
+    // TODO: figure out note layouts, for now just a string. potentially divide into categories?
     private String text;
     
+    // Constructor
     private Note(String title){
         this.id = notes.size();
         this.title = title;
         this.text = "Default Text";
     }
 
-    //Getters
+    // Getters
     public int getId(){
         return this.id;
     }
@@ -84,7 +90,7 @@ public class Note implements Serializable{
         return this.text;
     }
 
-    //Setters
+    // Setters
     public boolean setTitle(String title){
         this.title = title;
         return true;
@@ -94,6 +100,7 @@ public class Note implements Serializable{
         return true;
     }
 
+    // To String
     @Override
     public String toString(){
         return String.format("%s\n  ID: %d\n  Text: %s",title,id,text);
