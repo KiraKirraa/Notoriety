@@ -1,15 +1,19 @@
 import java.util.ArrayList;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JTabbedPane;
 
 //Data for boards
-public class Board implements java.io.Serializable{
+public class Board extends JDesktopPane implements java.io.Serializable{
     private static int boardCount = 0;
     private static ArrayList<Board> boards = new ArrayList<>();
     private static final String SAVELOCATION = "MyBoards.boards";
 
     //Static Methods
-    public static Board newBoard(String name){
+    public static Board newBoard(String name, JTabbedPane parent){
         Board b = new Board(name);
         boards.add(b);
+        parent.addTab(b.title,b);
         return b;
     }
     public static Board getBoardById(int id){
@@ -60,6 +64,7 @@ public class Board implements java.io.Serializable{
 
     //Constructors
     private Board(String name){
+        super();
         this.id = boardCount;
         this.title = name;
         boardCount++;

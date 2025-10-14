@@ -20,37 +20,34 @@ class Main{
         Note.printAll();
         Note.saveNotes();
 
-        Board.loadBoards();
-        Board.newBoard("Board1");
-        Board.getBoardById(0).addItem(1);
-        Board.newBoard("Board2");
-        Board.printAll();
-        Board.saveBoards();
-
         // Create the main application window   
         JFrame frame = new JFrame(APP_NAME);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1080, 720);
-
-        // Load the icon image
         ImageIcon icon = new ImageIcon(ICON_PATH); // Replace with your image path
         frame.setIconImage(icon.getImage());
 
-        // TO REPLACE WITH TABS LATER
-        JDesktopPane desktopPane = new JDesktopPane();
-        frame.add(desktopPane, BorderLayout.CENTER);
+        // Set content
+        JTabbedPane tabbedPane = new JTabbedPane();
+        frame.add(tabbedPane);
 
-        // Temporary Label for goofiness
-        JLabel welcomeLabel = new JLabel("Welcome to " + APP_NAME + "!");
-        welcomeLabel.setBounds(20, 20, 300, 30); // Set position and size
-        desktopPane.add(welcomeLabel);
+
+        Board.loadBoards();
+
+        // Board.newBoard("Board1", tabbedPane);
+        // Board.getBoardById(0).addItem(1);
+        // Board.newBoard("Board2", tabbedPane);
+
+        tabbedPane.addTab("readd",Board.getBoardById(0));
+        Board.saveBoards();
 
         // ADD FUNCTIONALITY TO TABS LATER??
-        for(int i = 0; i < 2; i++){
-            Item internalFrame = new Item(i);
-            desktopPane.add(internalFrame);
-            internalFrame.setVisible(true);
-        }
+        // for(int i = 0; i < 2; i++){
+        //     Item internalFrame = new Item(i);
+        //     Board.getBoardById(i).add(internalFrame);
+        //     internalFrame.setVisible(true);
+        // }
+
 
 
         // Can this be application stuff instrad? new SwingApplication()?

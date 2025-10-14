@@ -21,5 +21,11 @@ public class Item extends JInternalFrame{
         this.setLocation(50 + noteId * 50, 50 + noteId * 50); // Offset each frame
         this.setVisible(true);
     }
+
+    public static Item newItem(int noteId, Board parent){
+        Item i = new Item(noteId);
+        parent.add(i);
+        return i;
+    }
     
 }
